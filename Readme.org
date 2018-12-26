@@ -1,0 +1,14 @@
+在win7下添加设置HOME目录，和要加载的文init.el文件，选则自己相应的安装包的路径。
+
+(setenv "HOME" "D:/emacs-26.1-x86_64/emacs_home")
+(load-file "d:/emacs-26.1-x86_64/emacs_home/.emacs.d/init.el")
+
+1.如果在下载pakages后启动失败出现如下错误：
+Warning (initialization): An error occurred while loading `c:/Users/Administrator/AppData/Roaming/.emacs':
+
+File is missing: Cannot open load file, No such file or directory, bind-map
+
+则第一次可以在命令行中用emacs --insecure启动或者下载bind-map，一般bind-map是自动下载但由于网络问题可能没有自动下载下来。
+将c:/Users/Administrator/AppData/Roaming/设置为HOME的环境变量才能实别--insecure的参数，否则就会报无效参数的错误。
+
+2. 如果出现了缺少souce code pro的字体，则在tools目录下有相应的字体安装。
