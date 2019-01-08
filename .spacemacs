@@ -37,13 +37,14 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(windows-scripts
+   '(markdown
+     windows-scripts
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
-     ivy
-     ;;helm
+     ;;ivy
+     helm
      auto-completion
      better-defaults
      emacs-lisp
@@ -63,6 +64,7 @@ This function should only modify configuration layer settings."
                chinese-enable-fcitx t)
      asm
      c-c++
+     cscope
      restructuredtext
      )
 
@@ -460,9 +462,9 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 (setq configuration-layer-elpa-archives
-      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-	("org-cn"   . "http://elpa.zilongshanren.com/org/")
-	("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
+      '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+	      ("org-cn"   . "http://elpa.emacs-china.org/org/")
+	("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   )
@@ -497,7 +499,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (powershell helm-gtags ggtags counsel-gtags yasnippet-snippets x86-lookup ws-butler writeroom-mode winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smex smeargle restart-emacs request rainbow-delimiters pyim popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nasm-mode nameless mwim move-text magit-svn magit-gitflow macrostep lorem-ipsum link-hint ivy-yasnippet ivy-xref ivy-rtags ivy-purpose ivy-hydra indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate google-c-style golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fcitx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline disaster diminish define-word counsel-projectile company-statistics company-rtags company-c-headers column-enforce-mode cnfonts clean-aindent-mode clang-format chinese-conv centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-complete-rst auto-compile aggressive-indent ace-window ace-pinyin ace-link ac-ispell))))
+    (helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-gitignore helm-git-grep helm-flx helm-descbinds helm-cscope helm-company helm-c-yasnippet helm-ag ace-jump-helm-line yasnippet-snippets xcscope x86-lookup ws-butler writeroom-mode winum window-purpose which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle restart-emacs request rainbow-delimiters pyim powershell popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nasm-mode nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate google-c-style golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fcitx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline disaster diminish define-word counsel-projectile company-statistics company-rtags company-c-headers column-enforce-mode cnfonts clean-aindent-mode clang-format chinese-conv centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-complete-rst auto-compile aggressive-indent ace-window ace-pinyin ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
