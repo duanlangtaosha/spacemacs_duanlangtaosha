@@ -1,4 +1,4 @@
-﻿;; -*- mode: emacs-lisp; lexical-binding: t -*-
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -37,14 +37,16 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(markdown
+   '(html
+     ;;javascript
+     markdown
      windows-scripts
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
-     ;;ivy
-     helm
+     ivy
+     ;;helm
      auto-completion
      better-defaults
      emacs-lisp
@@ -82,7 +84,21 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    flyspell-correct
+                    flyspell-correct magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+                    evil-args evil-ediff evil-exchange evil-unimpaired
+                    evil-indent-plus volatile-highlights smartparens
+                    spaceline holy-mode skewer-mode rainbow-delimiters
+                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+                    clang-format define-word google-translate disaster epic
+                    fancy-battery org-present orgit orglue spacemacs-theme
+                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
+                    helm-themes helm-swoop helm-spacemacs-help smeargle
+                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -482,6 +498,14 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+   ;;网上说打开工程文件慢的问题
+  (setq vc-handled-backends())
+
+  ;; 将orgmode 转换为rst文档，暂时不能用，没有下载相应的包
+  ;;(require 'ox-rst)
+  ;;打开org-mode转换为mkdown的功能
+(setq org-export-backends (quote (ascii html icalendar latex md rst)))
   ;;(spacemacs//set-monospaced-font   "Source Code Pro" "Hiragino Sans GB" 14 16)
   )
 
@@ -499,7 +523,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-gitignore helm-git-grep helm-flx helm-descbinds helm-cscope helm-company helm-c-yasnippet helm-ag ace-jump-helm-line yasnippet-snippets xcscope x86-lookup ws-butler writeroom-mode winum window-purpose which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle restart-emacs request rainbow-delimiters pyim powershell popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nasm-mode nameless mwim move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate google-c-style golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fcitx fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline disaster diminish define-word counsel-projectile company-statistics company-rtags company-c-headers column-enforce-mode cnfonts clean-aindent-mode clang-format chinese-conv centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-complete-rst auto-compile aggressive-indent ace-window ace-pinyin ace-link ac-ispell))))
+    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode simple-httpd helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data wgrep smex ivy-yasnippet ivy-xref ivy-rtags ivy-purpose ivy-hydra json-navigator hierarchy json-mode json-snatcher json-reformat yasnippet-snippets x86-lookup writeroom-mode winum window-purpose which-key web-beautify uuidgen use-package unfill toc-org tern string-inflection spaceline-all-the-icons restart-emacs pyim prettier-js powershell popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer org-projectile org-pomodoro org-mime org-brain open-junk-file neotree nasm-mode nameless mwim move-text mmm-mode markdown-toc magit-svn macrostep livid-mode link-hint js2-refactor js-doc indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers helm-xref helm-rtags helm-projectile helm-org-rifle helm-mode-manager helm-gtags helm-gitignore helm-git-grep helm-flx helm-descbinds helm-cscope helm-company helm-ag google-c-style golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link ggtags fuzzy font-lock+ flycheck-rtags flycheck-pos-tip find-by-pinyin-dired fill-column-indicator fcitx expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lion evil-iedit-state evil-goggles evil-cleverparens evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish counsel-projectile counsel-gtags company-statistics company-rtags company-c-headers column-enforce-mode cnfonts chinese-conv centered-cursor-mode bind-map auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path ace-window ace-pinyin ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
