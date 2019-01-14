@@ -84,21 +84,7 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                    flyspell-correct magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
-                    evil-args evil-ediff evil-exchange evil-unimpaired
-                    evil-indent-plus volatile-highlights smartparens
-                    spaceline holy-mode skewer-mode rainbow-delimiters
-                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
-                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode git-gutter git-gutter-fringe  evil-escape
-                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
-                    ac-ispell ace-jump-mode auto-complete auto-dictionary
-                    clang-format define-word google-translate disaster epic
-                    fancy-battery org-present orgit orglue spacemacs-theme
-                    helm-flyspell flyspell-correct-helm clean-aindent-mode
-                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
-                    helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
+                    flyspell-correct 
                                     )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -506,7 +492,103 @@ before packages are loaded."
   ;;(require 'ox-rst)
   ;;打开org-mode转换为mkdown的功能
 (setq org-export-backends (quote (ascii html icalendar latex md rst)))
-  ;;(spacemacs//set-monospaced-font   "Source Code Pro" "Hiragino Sans GB" 14 16)
+;;(spacemacs//set-monospaced-font   "Source Code Pro" "Hiragino Sans GB" 14 16)
+
+; org-mode export to latex
+(require 'ox-latex)
+(setq org-src-fontify-natively t) ;;在org文件中显示代码高亮
+(setq org-export-latex-listings t)
+; org-mode source code setup in exporting to latex
+(add-to-list 'org-latex-listings '("" "listings"))
+(add-to-list 'org-latex-listings '("" "color"))
+(add-to-list 'org-latex-packages-alist
+             '("" "hyperref" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "xcolor" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "listings" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "fontspec" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "indentfirst" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "xunicode" t))
+(add-to-list 'org-latex-packages-alist
+         '("" "amsmath"))
+(add-to-list 'org-latex-packages-alist
+         '("" "graphicx" t))
+(add-to-list 'org-latex-classes
+          '("my-org-book-zh"
+"\\documentclass{book}
+\\usepackage[slantfont, boldfont]{xeCJK}
+% chapter set
+\\usepackage[Lenny]{fncychap}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+\\setCJKmainfont{SimSun} % 设置缺省中文字体
+\\parindent 2em
+\\setmainfont{Times New Roman} % 英文衬线字体
+\\setsansfont{Source Code Pro} % 英文无衬线字体
+\\setmonofont{Source Code Pro} % 英文等宽字体
+\\defaultfontfeatures{Mapping=tex-text} %如果没有它，会有一些 tex 特殊字符无法正常使用，比如连字符。
+% 中文断行
+\\XeTeXlinebreaklocale \"zh\"
+\\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+% 代码设置
+\\lstset{
+numbers=left, %显示代码行号在左边
+basicstyle=\\ttfamily, %设置代码块为等宽字体
+numberstyle= \\tiny, 
+keywordstyle= \\color{ blue!70}, % 设定相应语言中关键字颜色
+commentstyle=\\color{red!50!green!50!blue!50},    % 设定注释部分字体
+frame=shadowbox, % 设定代码区边框
+breaklines=true,  % 设定LaTeX对过长的代码行进行自动换行
+showstringspaces=false,   % 设定代码中字符串的空格正常显示
+rulesepcolor= \\color{ red!20!green!20!blue!20} 
+} 
+[EXTRA]
+"
+             ("\\chapter{%s}" . "\\chapter*{%s}")
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(add-to-list 'org-latex-classes
+          '("my-org-article-zh"
+"\\documentclass{article}
+\\usepackage[slantfont, boldfont]{xeCJK}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+\\setCJKmainfont{SimSun} % 设置缺省中文字体
+\\parindent 2em
+\\setmainfont{Times New Roman} % 英文衬线字体
+\\setsansfont{Times New Roman} % 英文无衬线字体
+\\setmonofont{Source Code Pro} % 英文等宽字体
+%\\punctstyle{Times New Roman} % 开明式标点格式
+\\defaultfontfeatures{Mapping=tex-text} %如果没有它，会有一些 tex 特殊字符无法正常使用，比如连字符。
+% 中文断行
+\\XeTeXlinebreaklocale \"zh\"
+\\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+% 代码设置
+\\lstset{numbers=left, 
+basicstyle=\\ttfamily,
+numberstyle= \\tiny, 
+keywordstyle= \\color{ blue!70},commentstyle=\\color{red!50!green!50!blue!50}, 
+frame=shadowbox, 
+breaklines=true,
+rulesepcolor= \\color{ red!20!green!20!blue!20} 
+} 
+[EXTRA]
+"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(setq org-latex-pdf-process
+      '("xelatex -interaction nonstopmode %b"
+    "xelatex -interaction nonstopmode %b"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -523,7 +605,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode simple-httpd helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data wgrep smex ivy-yasnippet ivy-xref ivy-rtags ivy-purpose ivy-hydra json-navigator hierarchy json-mode json-snatcher json-reformat yasnippet-snippets x86-lookup writeroom-mode winum window-purpose which-key web-beautify uuidgen use-package unfill toc-org tern string-inflection spaceline-all-the-icons restart-emacs pyim prettier-js powershell popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer org-projectile org-pomodoro org-mime org-brain open-junk-file neotree nasm-mode nameless mwim move-text mmm-mode markdown-toc magit-svn macrostep livid-mode link-hint js2-refactor js-doc indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers helm-xref helm-rtags helm-projectile helm-org-rifle helm-mode-manager helm-gtags helm-gitignore helm-git-grep helm-flx helm-descbinds helm-cscope helm-company helm-ag google-c-style golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link ggtags fuzzy font-lock+ flycheck-rtags flycheck-pos-tip find-by-pinyin-dired fill-column-indicator fcitx expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lion evil-iedit-state evil-goggles evil-cleverparens evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish counsel-projectile counsel-gtags company-statistics company-rtags company-c-headers column-enforce-mode cnfonts chinese-conv centered-cursor-mode bind-map auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path ace-window ace-pinyin ace-link))))
+    (auto-org-md ws-butler volatile-highlights vi-tilde-fringe symon smeargle rainbow-delimiters orgit org-present org-download org-bullets magit-gitflow lorem-ipsum highlight-indentation helm-make helm helm-core google-translate gh-md flx-ido fancy-battery eyebrowse evil-unimpaired evil-mc evil-lisp-state evil-indent-plus evil-exchange evil-escape evil-ediff evil-args disaster define-word clean-aindent-mode clang-format auto-complete-rst ac-ispell auto-complete yasnippet-snippets xcscope x86-lookup writeroom-mode winum which-key wgrep web-mode web-beautify uuidgen use-package unfill toc-org tagedit string-inflection spaceline-all-the-icons smex slim-mode scss-mode sass-mode restart-emacs request pyim pug-mode prettier-js powershell popwin persp-mode pcre2el password-generator paradox pangu-spacing overseer org-projectile org-pomodoro org-mime org-brain open-junk-file neotree nasm-mode nameless mwim move-text mmm-mode markdown-toc magit-svn macrostep link-hint ivy-yasnippet ivy-xref ivy-rtags ivy-purpose ivy-hydra indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers google-c-style golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx find-by-pinyin-dired fill-column-indicator fcitx expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lion evil-iedit-state evil-goggles evil-cleverparens evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish counsel-projectile counsel-css company-web company-statistics company-rtags company-c-headers column-enforce-mode cnfonts chinese-conv centered-cursor-mode bind-map auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-pinyin ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
